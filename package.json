@@ -1,26 +1,31 @@
 {
-	"name": "inline-source",
-	"description": "Inline all flagged js & css source files",
-	"version": "0.3.2",
-	"author": "popeindustries <alex@pope-industries.com>",
-	"keywords": ["inline", "html", "js", "css"],
-	"dependencies": {
-		"uglify-js": "2.4.8",
-		"clean-css": "2.0.6"
-	},
-	"devDependencies": {
-		"should": "*",
-		"mocha": "*"
-	},
-	"main": "index.js",
-	"scripts": {
-		"test": "mocha --reporter spec --require should"
-	},
-	"engines": {
-		"node": ">=0.8.0"
-	},
-	"repository": "git://github.com/popeindustries/inline-source.git",
+  "name": "inline-source",
+  "description": "Inline all flagged js & css source files",
+  "version": "0.3.3",
+  "author": "popeindustries <alex@pope-industries.com>",
+  "keywords": [
+    "inline",
+    "html",
+    "js",
+    "css"
+  ],
+  "dependencies": {
+    "uglify-js": "2.4.8",
+    "clean-css": "2.0.6"
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec --require should"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "repository": "git://github.com/popeindustries/inline-source.git",
   "readmeFilename": "README.md",
-	"readme": "[![Build Status](https://travis-ci.org/popeindustries/inline-source.png)](https://travis-ci.org/popeindustries/inline-source)\n\n# inline-source\n\nInline all `<script>` or `<link>` tags that contain the `inline` attribute.",
-	"license": "MIT"
+  "readme": "[![Build Status](https://travis-ci.org/popeindustries/inline-source.png)](https://travis-ci.org/popeindustries/inline-source)\n\n# inline-source\n\nInline all `<script>` or `<link>` tags that contain the `inline` attribute.",
+  "license": "MIT"
 }
