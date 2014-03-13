@@ -2,8 +2,8 @@ var path = require('path')
 	, fs = require('fs')
 	, uglify = require('uglify-js')
 	, CleanCSS = require('clean-css')
-	, RE_INLINE_SOURCE = /^\s*?(<script.*?\sinline.*?[^<]+<\/script>)/gm
-	, RE_INLINE_HREF = /^\s*?(<link.*?\sinline[^>]*>)/gm
+	, RE_INLINE_SOURCE = /\s*?(<script[^>]*?\sinline[^>]*?><\/script>)/gm
+	, RE_INLINE_HREF = /\s*?(<link.*?\sinline[^>]*>)/gm
 	, RE_SRC = /src=["|'](.+)["|']/
 	, RE_HREF = /href=["|'](.+)["|']/;
 
@@ -12,11 +12,18 @@ var path = require('path')
  * @param {String} htmlpath
  * @param {String} html
  */
+
+var matches = [];
 module.exports = function(htmlpath, html) {
 	var match;
 
 	// Parse inline <script> tags
 	while (match = RE_INLINE_SOURCE.exec(html)) {
+
+		if(matches.indexOf(match[1]) > -1) {
+			break;
+		}
+		matches.push(match[1]);
 		html = inline('js', match[1], htmlpath, html);
 	}
 
@@ -44,6 +51,7 @@ function inline(type, source, htmlpath, html) {
 		, filepath = path.resolve(path.extname(htmlpath).length ? path.dirname(htmlpath) : htmlpath, source.match(isCSS ? RE_HREF : RE_SRC)[1])
 		, filecontent;
 
+
 	if (fs.existsSync(filepath)) {
 		filecontent = fs.readFileSync(filepath, 'utf8');
 		// Compress
@@ -55,6 +63,9 @@ function inline(type, source, htmlpath, html) {
 		}
 		content += filecontent + '</' + tag + '>';
 		// Inline
+
+		var newHtml = html.replace(source, content);
+
 		return html.replace(source, content);
 	} else {
 		// Remove 'inline' attribute
